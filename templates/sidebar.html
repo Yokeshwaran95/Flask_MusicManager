@@ -1,0 +1,34 @@
+{% block sidebar %}
+
+<style>
+        .card{
+            box-shadow: 0 16px 48px #E3E7EB;
+        }
+       
+</style>
+
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4 float-right ">
+<div class="card my-4">
+        <h5 class="card-header">About Developer</h5>
+    <div class="card-body">
+        <p class="card-text"> Hello, Good to see you here. I am Yokesh, more keen in knowing technology evolutions in Automotive, Gadgets, Science</p>
+        <a href="http://knowyokesh.herokuapp.com/" target="blank"
+           class="btn btn-danger">Know more!</a>
+    </div>
+</div>
+<br><br>
+<div>
+    <h4>Looking for a song? Search here</h4>
+    <form class="form-inline" method="GET" action="search">
+        <div class="form-group">
+            <input type='text' class="form-control" name="query" id="query" placeholder="Search with title,artist">
+
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+</div>
+
+{% endblock sidebar %}

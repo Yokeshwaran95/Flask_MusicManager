@@ -1,34 +1,54 @@
-<html>
-<head>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}"/>
-    <title>Upload song</title>
-</head>
-<body>
-<div class="form-audio">
-    <h2>Upload Song</h2>
-</div>
-<div>
-	<h4>Search</h4>
-	<form class="form-inline" method="GET" action="search">
-		<div class="form-group">
-			<input type='text' class="form-control" name="query" id="query" placeholder="Search with title,artist">
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
 
-		</div>
-		<button type="submit" class="btn btn-primary">Search</button>
-	</form>
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Explore Songs of your choice </h3>
+                    <p class="text-light"> 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            {% for song in song_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title"><a href="{{ url_for('index_detail',song_slug=song.slug) }}">{{ song.filename }}</a></h2>
+                    <label>Artist</label><p class="card-text text-muted h6">{{ song.artist }} </p>
+                    <label>Album</label><p class="card-text text-muted h6">{{ song.album }} </p>
+                    <div class="utility">
+                        <a href="{{ url_for('delete',song_slug=song.slug) }}">Delete</a>
+                        <a href="{{ url_for('download',song_filename=song.filename) }}">Download</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    </div>
 </div>
-<div class="Add-song">
-    <a href="{{ url_for('upload') }}">Add a song</a>
-    {% for songs in song_list %}
-    <a href="{{ url_for('index_detail',song_slug=songs.slug) }}"><p>{{songs.title}}</p></a>
-    <p>{{ songs.album }}</p>
-    <p>{{ songs.artist }}</p>
-    <h3><a href="{{ url_for('delete',song_slug=songs.slug) }}"><p>delete</p></a></h3>
-    <h3><a href="{{ url_for('download',song_filename=songs.filename) }}"><p>download</p></a></h3>
-    <br><hr><br>
-    {% endfor %}
-</div>
-</body>
-</html>
-
+{%endblock%}
