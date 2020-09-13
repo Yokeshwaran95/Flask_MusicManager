@@ -1,5 +1,11 @@
- .audio {
+     	body{
+    		margin:20px;
+    		border:black solid;
+    	}
+
+    	.audio {
  width: 100%;
+ border:black;
  }
  .modal-footer {
  text-align: center;
@@ -10,3 +16,14 @@
  .page-header {
  text-align: center;
  }
+
+ .upload{
+ 	top:50%;
+ 	bottom:50%;
+ 	transform: translate(-50%,-50%);
+ 	border:black solid;
+ }
+
+
+
+ /*song detail html css*/

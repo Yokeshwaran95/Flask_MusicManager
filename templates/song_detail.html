@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>{{ song.title }}</title>
+	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/> -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}"/>	 -->
+    <style>
+ body{
+    		margin:20px;
+    		border:black solid;
+    		/*height:100vh;*/
+    	}
+ .upload{
+ 	top:50%;
+ 	left:50%;
+ 	padding:20px;
+ 	margin:20%;
+ 	/*border:black solid;*/
+ }
+
+  .upload-header{
+ 	top:50%;
+ 	left:50%;
+ 	padding:20px;
+ 	margin: 30px 20%;
+ 	/*border:black solid;*/
+ 	align-items:center;
+ }
+
+ h1{
+ 	text-align:center;
+ }
+
+.audio {
+	 width: 100%;
+	}
+
+    </style>
+</head>
+<body>
+	<div class="upload-header">
+		<h1>Play and Enjoy {{ song.filename }} </h1>
+	</div>
+	<div class="upload">
+    <h3>Title</h3><p>{{song.title}}</p>
+    <br>
+    <h3>Album</h3><p>{{ song.album }}</p>
+    <br>
+    <h3>Artist</h3>{{ song.artist }}</p>
+    <br>
+     <div class="hero-unit">
+        <audio class="audio" controls>
+            <source src="{{ song.slug }}" type="audio/mpeg">
+        </audio><hr/>
+    </div>
+</div>
+</body>
+</html>
