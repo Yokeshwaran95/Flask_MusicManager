@@ -1,23 +1,25 @@
-from flask import Flask, render_template, request, redirect, url_for,send_file
+from flask import Flask, render_template, request, redirect, url_for,send_file,flash
 from flask_sqlalchemy import SQLAlchemy
+# from flask_wtf import FlaskForm
+from sqlalchemy import and_, or_, not_
 from werkzeug.utils import secure_filename
 import os
 import logging
 from io import BytesIO
 from slugify import slugify
-import flask_whooshalchemyplus as wa
-from flask_whooshalchemyplus import index_all
-# from songs import app
+
+
+
 app=Flask(__name__)
 
 APP_ROOT=os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER=os.path.join(APP_ROOT,'static')
+UPLOAD_FOLDER=os.path.join(APP_ROOT,'static/uploads')
 logging.basicConfig(level=logging.DEBUG)
-
-
-
+ALLOWED_EXTENSIONS = {'mp3'}
+app.secret_key = os.urandom(24)
 
 db=SQLAlchemy(app)
+
 
 
 class Upload(db.Model):
@@ -38,10 +40,10 @@ class Upload(db.Model):
 	def __repr__(self):
 		return self.title
 
-app.config['WHOOSH_BASE']="whoosh"
 
-wa.whoosh_index(app, Upload)
-
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
@@ -56,6 +58,7 @@ def index_detail(song_slug):
 @app.route('/delete/<song_slug>')
 def delete(song_slug):
 	song=Upload.query.filter_by(slug=song_slug).first()
+	os.remove(os.path.join(app.config['UPLOAD_FOLDER'],song.filename))
 	db.session.delete(song)
 	db.session.commit()
 	return redirect(url_for("index"))
@@ -73,20 +76,27 @@ def upload():
 		print("&&&&&&&&&&&&&&&&&")
 		print(filename)
 		print("&&&&&&&&&&&&&&&&&&&")
-		# file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-		new_song=Upload(title=title,song=file.read(),album=album,artist=artist,filename=filename)
-		db.session.add(new_song)
-		db.session.commit()
-		return redirect(url_for("index"))
+		
+		if file and allowed_file(file.filename):
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+			new_song=Upload(title=title,song=file.read(),album=album,artist=artist,filename=filename)
+			db.session.add(new_song)
+			db.session.commit()
+			return redirect(url_for("index"))
+		else:
+			feedback="Upload only .mp3 files"
+			return render_template("upload.html",feedback=feedback)
 	return render_template("upload.html")
+
+
 
 @app.route('/search')
 def search():
-	song=Upload.query.whoosh_search(request.args.get('query')).all()
-	print("*******************")
-	print(song)
-	print("*******************")
-	return render_template('index.html',song=song)
+	serch=request.args.get('query')
+	song_list=Upload.query.filter(or_(Upload.filename.contains(serch),
+								Upload.album.contains(serch),
+								Upload.artist.contains(serch))).all()
+	return render_template('index.html',song_list=song_list)
 
 @app.route('/download/<song_filename>')
 def download(song_filename):
@@ -101,5 +111,6 @@ if __name__=='__main__':
 	app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
 	app.config['DEBUG']=True
 	app.config['UPLOAD_FOLDER']=UPLOAD_FOLDER
+	app.config['ALLOWED_EXTENSIONS']=".mp3"
 	db.create_all()
 	app.run(debug=True)

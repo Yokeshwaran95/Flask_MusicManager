@@ -1,12 +1,28 @@
 <html>
 <head>
 	<title>Upload a song</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
+	
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/upload_custom.css') }}"/>
+	<style>
+		.cont{
+			margin:auto;
+			top:50%;
+			left:50%;
+			padding:100px;
+			align-items:center;
+			font-family: monospace;
+			color:black;
+		}
+	</style>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
 </head>
 <body>
 	<div class="cont">
+		<h1> Upload a Song </h1>
+		<br>
+		<br>
 		<div class="form-audio">
+
 			<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
 			<label for="title">Title</label>
 			<input type="text" name="title" placeholder="Enter song title">
@@ -22,6 +38,9 @@
 			<br>
 			<label for="song">Upload Song</label>			    
 			<input type="file" name="file" class="button" multiple> <br/><br/>
+			{% if feedback %}
+			{{feedback }}
+			{% endif %}
 			<input type="submit" value="Upload" class="btn btn-danger">
 			</form>
 

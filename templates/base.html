@@ -33,6 +33,10 @@
             box-shadow: 0 16px 48px #E3E7EB;
             padding-top: 10px;
         }
+        .Postsong{
+            border:black;
+            border-radius: 20px;
+        }
     </style>
 
         <!-- Navigation -->
@@ -48,22 +52,19 @@
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="http://knowyokesh.herokuapp.com/">About</a>
                         </li>
+                        <div class="Postsong">
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="{{ url_for('upload') }}">Add a Song</a>
                         </li>
+                        </div>
 
-                        <li class="nav-item text-black">
-                        <a class="nav-link text-black font-weight-bold" href="{{ url_for('upload') }}">Login</a>
-                        </li>
 
                     </ul>
                 </div>
             </div>
         </nav>
         {% block content %}
-        <!-- Content Goes here -->
         {% endblock content %}
-        <!-- Footer -->
         <footer class="py-3 bg-grey">
             <p class="m-0 text-dark text-center ">Copyright &copy; Yokesh</p>
         </footer>
