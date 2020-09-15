@@ -1,15 +1,16 @@
 <html>
 <head>
 	<title>{{ song.title }}</title>
-	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/upload_custom.css') }}"/>	
 
 </head>
 <body>
 	<div class="upload-header">
-		<h1>Play and Enjoy {{ song.filename }} </h1>
+		
 	</div>
 	<div class="upload">
+        <h1>Play and Enjoy {{ song.filename }} </h1>
+        <br>
     <h3>Title</h3><p>{{song.title}}</p>
     <br>
     <h3>Album</h3><p>{{ song.album }}</p>

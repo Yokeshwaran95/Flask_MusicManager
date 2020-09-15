@@ -3,22 +3,11 @@
 	<title>Upload a song</title>
 	
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/upload_custom.css') }}"/>
-	<style>
-		.cont{
-			margin:auto;
-			top:50%;
-			left:50%;
-			padding:100px;
-			align-items:center;
-			font-family: monospace;
-			color:black;
-		}
-	</style>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
 </head>
 <body>
 	<div class="cont">
-		<h1> Upload a Song </h1>
+		<h1> Post Songs Here  </h1>
 		<br>
 		<br>
 		<div class="form-audio">
@@ -28,11 +17,11 @@
 			<input type="text" name="title" placeholder="Enter song title">
 			<br>
 			<br>
-			<label for="artist">artist</label>
+			<label for="artist">Artist</label>
 			<input type="text" name="artist" placeholder="Enter Artist name">
 			<br>
 			<br>
-			<label for="album">album</label>
+			<label for="album">Album</label>
 			<input type="text" name="album" placeholder="Enter album name">
 			<br>
 			<br>

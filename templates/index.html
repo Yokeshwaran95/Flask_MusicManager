@@ -1,21 +1,6 @@
 {% extends "base.html" %} 
 {% block content %}
-<style>
-    body {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
-        background-color: #fdfdfd;
-    }
-    
-    .head_text {
-        color: white;
-    }
-    
-    .card {
-        box-shadow: 0 16px 48px #E3E7EB;
-    }
-</style>
-
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
@@ -37,12 +22,14 @@
             {% for song in song_list %}
             <div class="card mb-4">
                 <div class="card-body">
-                    <h2 class="card-title"><a href="{{ url_for('index_detail',song_slug=song.slug) }}">{{ song.filename }}</a></h2>
-                    <label>Artist</label><p class="card-text text-muted h6">{{ song.artist }} </p>
-                    <label>Album</label><p class="card-text text-muted h6">{{ song.album }} </p>
+                    <h2 class="card-title"><a href="{{ url_for('index_detail',song_slug=song.slug) }}"><i class="fa fa-music"></i> {{ song.filename }}</a></h2>
+                    <label>Title</label><p class="card-text text-muted h6" padding-left="20px">{{ song.title }} </p>
+                    <label>Artist</label><p class="card-text text-muted h6" padding-left="20px">{{ song.artist }} </p>
+                    <label>Album</label><p class="card-text text-muted h6" padding-left="20px">{{ song.album }} </p>
+                    <hr>
                     <div class="utility">
-                        <a href="{{ url_for('delete',song_slug=song.slug) }}">Delete</a>
-                        <a href="{{ url_for('download',song_filename=song.filename) }}">Download</a>
+                        <a class="delete" href="{{ url_for('delete',song_slug=song.slug) }}"><i class="fa fa-trash"></i>  Delete</a>
+                        <a class="download" href="{{ url_for('download',song_filename=song.filename) }}"><i class="fa fa-download"></i>  Download</a>
                     </div>
                 </div>
             </div>

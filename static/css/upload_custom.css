@@ -1,10 +1,24 @@
  body{
     		margin:20px;
-    		border:black solid;
+    		height:100vh;
     		font-family:monospace;
-    		background-color: #6c679875;
-    		/*height:100vh;*/
+    		background-color: #9e9e9e5e;
     	}
+
+ .cont{
+	margin:20%;
+	margin-top:5%;
+	top:50%;
+	left:50%;
+	padding:100px;
+	align-items:center;
+	font-family: monospace;
+	color:black;
+	border:black solid;
+	border-radius:30px;
+	background:#e6e6e6;
+	box-shadow: 5px 10px;
+		}
  .audio {
  width: 100%;
  border:black;
@@ -13,7 +27,10 @@
  text-align: center;
  }
  .form-audio {
- margin-left: 350px;
+ margin: 0 20%;
+ padding:20px;
+ top:50%;
+ left:50%;
  }
  .page-header {
  text-align: center;
@@ -22,10 +39,19 @@
  .upload{
 	top:50%;
  	left:50%;
+ 	border:black solid;
  	padding:20px;
  	margin:20%;
+ 	border:black solid;
+	border-radius:30px;
+	background:grey;
+	box-shadow: 5px 10px;
  }
 
+    label{
+        font-weight:bold;
+        font-size:20px;
+    }
 
   .upload-header{
  	top:50%;
@@ -38,6 +64,16 @@
 
  h1{
  	text-align:center;
+ 	font-size:30px;
+ }
+
+ h3{
+ 	font-weight:bold;
+ 	font-size:18px;
+ }
+ p{
+ 	font-weight:200;
+ 	font-size:15px;
  }
 
 
