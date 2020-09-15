@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for,send_file,flash
+from flask import Flask, render_template, request, redirect, url_for,send_file
 from flask_sqlalchemy import SQLAlchemy
 # from flask_wtf import FlaskForm
 from sqlalchemy import and_, or_, not_
@@ -73,9 +73,6 @@ def upload():
 		album=request.form.get('album')
 		artist=request.form.get('artist')
 		filename=secure_filename(file.filename)
-		print("&&&&&&&&&&&&&&&&&")
-		print(filename)
-		print("&&&&&&&&&&&&&&&&&&&")
 		
 		if file and allowed_file(file.filename):
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
@@ -102,7 +99,6 @@ def search():
 def download(song_filename):
 	file_data=Upload.query.filter_by(filename=song_filename).first()
 	return send_file(BytesIO(file_data.song),mimetype="audio/mp3",attachment_filename=file_data.filename,as_attachment=True,)
-
 
 
 
